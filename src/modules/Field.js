@@ -1,5 +1,6 @@
 export class Field {
     constructor(typeMismatch, valueMissing, inputName) {
+        this.name = inputName;
         this.typeMismatch = typeMismatch;
         this.valueMissing = valueMissing;
         this.inputElement = document.querySelector(`[data-id=${inputName}]`);

@@ -1,22 +1,27 @@
 export class EventHandler {
   constructor(formFieldsState) {
     this.formFieldsState = formFieldsState;
+  }
 
-    this.submit = {
-      form: (e) => {
-        if (!this.isEmail() || !this.isPostalCode() || !this.isConfirm()) {
-          e.preventDefault();
-        }
-      },
-    };
+  submitHandler(e) {
+    e.preventDefault();
+    this.formFieldsState.updateFormStatus();
+
+    if (!this.formFieldsState.formStatus) {
+      this.formFieldsState.fields.forEach((field) => {
+        const { errorSpan, name } = field;
+        errorSpan.textContent = this.formFieldsState.getErrorMsg(name);
+      });
+    }
   }
 
   inputHandler(fieldName) {
     const validator = this.formFieldsState.validators[fieldName];
-    const input = this.formFieldsState[fieldName].inputElement;
+    const field = this.formFieldsState[fieldName];
+    const input = field.inputElement;
+    input.nextElementSibling.textContent = "";
     if (validator()) {
-      input.nextElementSibling.textContent = "";
-      this.setFieldsStatus(input.dataset.id, true);
+      field.setStatus(input.dataset.id, true);
     }
   }
 
@@ -26,26 +31,8 @@ export class EventHandler {
     if (validator()) {
       errorSpan.textContent = "";
     } else {
-      this.showError(fieldName, errorSpan);
+      errorSpan.textContent = this.formFieldsState.getErrorMsg(fieldName);
       this.formFieldsState.updateFieldStatus(fieldName);
     }
   }
-
-  findErrorMsg(fieldName) {
-    const {valueMissing, typeMismatch, inputElement} = this.formFieldsState[fieldName];
-    const errorMsg = inputElement.validity.valueMissing
-      ? valueMissing
-      : typeMismatch;
-    return errorMsg;
-  }
-
-  showError(fieldName, errorSpan) {
-    const errorMsg = this.findErrorMsg(fieldName);
-    errorSpan.textContent = errorMsg;
-  }
-
-  capitalizeStr = (str) => {
-    const [first, ...rest] = str.split("");
-    return first.toUpperCase() + rest.join("");
-  };
 }

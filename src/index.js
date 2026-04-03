@@ -16,8 +16,6 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
     document.addEventListener('submit', (e) => {
-    if(e.target.dataset.id) {
-        eventHandler.submit[e.target.dataset.id](e);
-    }
+        eventHandler.submitHandler(e);
   });
 });
