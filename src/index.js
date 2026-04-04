@@ -1,4 +1,5 @@
 import { EventHandler, countryToISO, postalCodes, FormFieldsState } from "./modules/modules.js";
+import "./assets/css/styles.css";
 
 document.addEventListener("DOMContentLoaded", () => {
   const eventHandler = new EventHandler(new FormFieldsState(countryToISO, postalCodes));
