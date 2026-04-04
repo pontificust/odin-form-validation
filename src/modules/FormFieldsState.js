@@ -1,34 +1,38 @@
 import { Field } from "./Field.js";
-import { capitalizeStr } from "./utils.js";
 
 export class FormFieldsState {
   constructor(countries, postalCodes) {
     this.countries = countries;
     this.postalCodes = postalCodes;
-    this.formStatus = true;
-    this.email = new Field("Wrong type", "Value Missing", "email");
+    this.hasErrors = false;
+    this.email = new Field(
+      { typeMismatch: "Wrong type", valueMissing: "Value Missing" },
+      "email",
+    );
     this.country = new Field(
-      "The country must exist",
-      "Value Missing",
+      {
+        customMismatch: "The country must exist",
+        valueMissing: "Value Missing",
+      },
       "country",
     );
     this.postal = new Field(
-      "The code doesn't exist",
-      "Value Missing",
+      {customMismatch: "The code doesn't exist",
+      valueMissing: "Value Missing"},
       "postal",
     );
     this.password = new Field(
-      `The password must contain al least:
+      { patternMismatch: `The password must contain al least:
         - one uppercase English letter
         - one lowercase English letter
         - one digit
         - one special character.`,
-      "Value missing",
+      valueMissing: "Value missing"},
       "password",
     );
     this.confirm = new Field(
-      "The passwords must be equal",
-      "Value missing",
+      {customMismatch: "The passwords must be equal",
+      valueMissing: "Value missing",},
       "confirm",
     );
 
@@ -50,23 +54,24 @@ export class FormFieldsState {
   }
 
   updateFormStatus() {
-    this.formStatus = this.fields.some(field => {
-        this.updateFieldStatus(field.name);
-        field.status === false;
+    this.fields.forEach(({name}) => this.updateFieldStatus(name));
+    this.hasErrors = this.fields.some((field) => {
+      return field.hasErrors === true;
     });
   }
 
   updateFieldStatus = (fieldName) => {
-    const status = this.validators[fieldName]();
+    const status = !this.validators[fieldName]();
     this[fieldName].setStatus(status);
   };
 
   getErrorMsg(fieldName) {
-    const { valueMissing, typeMismatch, inputElement } =
-      this[fieldName];
+    const { inputElement, errors } = this[fieldName];
+    const { valueMissing, typeMismatch, patternMismatch, customMismatch } = errors;
     const errorMsg = inputElement.validity.valueMissing
-      ? valueMissing
-      : typeMismatch;
+      ? valueMissing : inputElement.validity.typeMismatch ?
+      typeMismatch : inputElement.validity.patternMismatch ?
+      patternMismatch : customMismatch;
     return errorMsg;
   }
 
@@ -75,7 +80,7 @@ export class FormFieldsState {
     if (!this.isCountry()) {
       return false;
     } else {
-      countryName = capitalizeStr(this.country.inputElement.value);
+      countryName = this.country.inputElement.value.toLowerCase();
     }
     const postalRegExp = new RegExp(
       this.postalCodes[this.countries[countryName]],
@@ -96,7 +101,7 @@ export class FormFieldsState {
       this.country.inputElement.validity.valid &&
       Object.hasOwn(
         this.countries,
-        capitalizeStr(this.country.inputElement.value),
+        this.country.inputElement.value.toLowerCase(),
       )
     );
   };

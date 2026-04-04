@@ -7,10 +7,13 @@ export class EventHandler {
     e.preventDefault();
     this.formFieldsState.updateFormStatus();
 
-    if (!this.formFieldsState.formStatus) {
+    if (this.formFieldsState.hasErrors) {
       this.formFieldsState.fields.forEach((field) => {
-        const { errorSpan, name } = field;
-        errorSpan.textContent = this.formFieldsState.getErrorMsg(name);
+        console.log(field);
+        if (field.hasErrors) {
+          const { errorSpan, name } = field;
+          errorSpan.textContent = this.formFieldsState.getErrorMsg(name);
+        }
       });
     }
   }
