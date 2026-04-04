@@ -1,3 +1,12 @@
+@font-face {
+    font-family: 'Orbitron';
+    src: url('../fonts/Orbitron-Regular.woff2') format('woff2'),
+        url('../fonts/Orbitron-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
 /*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
 
 /* Document
@@ -481,3 +490,59 @@ html {
 *::after {
   box-sizing: inherit;
 }
+
+:root {
+    --main-color: #39ff14;
+    --screen-background: #050a05;
+    --dark-green-text: #000;
+    --olive-green: #728467;
+}
+
+body {
+    background-color: var(--screen-background);
+    color: var(--main-color);
+    text-transform: uppercase;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: clamp(2rem, 3vw, 4rem);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+}
+
+.terminal__casing {
+    background-color: var(--olive-green);
+    border-radius: 40px;
+    padding: 35px;
+    width: clamp(300px, 85vw, 1400px);
+    aspect-ratio: 1.5;
+
+}
+
+.terminal__monitor {
+    background-color: var(--screen-background);
+    width: 100%;
+    aspect-ratio: 1.5;
+    border-radius: 20px;
+    padding: 40px;
+    border: 20px solid #3d4a36;
+}
+
+/* logo styles start */
+
+.logo {
+    display: flex;
+    flex-direction: column;
+}
+
+.logo span:first-of-type {
+    text-transform: none;
+    font-family: 'Orbitron';
+    font-weight: 900;
+    font-style: italic;
+    font-size: clamp(3rem, 5vw, 7rem);
+}
+
+/* logo styles end */
