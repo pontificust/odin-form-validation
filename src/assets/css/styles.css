@@ -530,7 +530,7 @@ body {
 
 .terminal__power-btn {
   position: absolute;
-  bottom: 10px;
+  bottom: 6px;
   border: none;
   border-radius: 50%;
   right: 48%;
@@ -538,7 +538,8 @@ body {
   background-image: var(--power-button-url);
   background-size: center;
   background-repeat: no-repeat;
-  width: 4%;
+  width: max(40px, 8%);
+  max-width: 40px;
   aspect-ratio: 1 / 1;
 }
 
@@ -695,5 +696,12 @@ body {
 
   .input-wrapper {
     width: 100%;
+  }
+
+  .status {
+    text-align: center;
+    font-size: 1rem;
+    height: 50px;
+    transition: all 0.4s;
   }
 }
