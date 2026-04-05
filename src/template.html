@@ -8,98 +8,100 @@
   <body>
     <main class="terminal__casing">
       <section class="terminal__monitor">
-          <section class="heading">
-            <h1 class="heading__logo">
-              <span>RobCo</span>
-              <span>industries</span>
-            </h1>
-          </section>
-          <form action="" class="form" novalidate>
-            <h2 class="form__title">Robco Registration Protocol</h2>
-              <div class="form__fields">
-                <div class="form__field">
-                  <label for="email" class="form__field-label">Email: *</label>
-                  <div class="input-wrapper">
-                    <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    class="form__field-input"
-                    data-id="email"
-                    required
-                    />
-                    <span class="error active"></span>
-                  </div>
-                </div>
-                <div class="form__field">
-                  <label for="country" class="form__field-label">Country: *</label>
-                  <div class="input-wrapper">
-                    <input
-                    type="text"
-                    id="country"
-                    name="country"
-                    class="form__field-input"
-                    data-id="country"
-                    required
-                    />
-                    <span class="error"></span>
-                  </div>
-                </div>
-                <div class="form__field">
-                  <label for="postal-code" class="form__field-label"
-                  >Postal code: *</label
-                  >
-                  <div class="input-wrapper">
-                    <input
-                    type="text"
-                    id="postal-code"
-                    name="postal-code"
-                    class="form__field-input"
-                    data-id="postal"
-                    required
-                    />
-                    <span class="error"></span>
-                  </div>
-                </div>
-                <div class="form__field">
-                  <label for="password" class="form__field-label">Password: *</label>
-                  <div class="input-wrapper">
-                    <input
-                    type="password"
-                    id="password"
-                    name="password"
-                    class="form__field-input"
-                    data-id="password"
-                    pattern="(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[#?!@$%^&*\-])[A-Za-z0-9#?!@$%^&*\-]{8,}"
-                    required
-                    />
-                    <span class="error"></span>
-                  </div>
-                </div>
-                <div class="form__field">
-                  <label for="password-confirm" class="form__field-label"
-                  >confirm password: *</label
-                  >
-                  <div class="input-wrapper">
-                    <input
-                    type="password"
-                    id="password-confirm"
-                    name="password-confirm"
-                    class="form__field-input"
-                    data-id="confirm"
-                    required
-                    />
-                    <span class="error"></span>
-                  </div>
-                </div>
+        <section class="heading">
+          <h1 class="heading__logo">
+            <span>RobCo</span>
+            <span>industries</span>
+          </h1>
+        </section>
+        <form action="" class="form" novalidate>
+          <h2 class="form__title">Robco Registration Protocol</h2>
+          <div class="form__fields">
+            <div class="form__field">
+              <label for="email" class="form__field-label">Email: *</label>
+              <div class="input-wrapper">
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  class="form__field-input"
+                  data-id="email"
+                  required
+                />
+                <span class="error active"></span>
               </div>
-              <div class="form__submit-wrapper">
-                <button class="form__submit-btn">submit</button>
+            </div>
+            <div class="form__field">
+              <label for="country" class="form__field-label">Country: *</label>
+              <div class="input-wrapper">
+                <input
+                  type="text"
+                  id="country"
+                  name="country"
+                  class="form__field-input"
+                  data-id="country"
+                  required
+                />
+                <span class="error"></span>
               </div>
-            </form>
-            <p class="status">status: awaiting input...</p>
-          </section>
-          <button class="terminal__power-btn"></button>
-        </main>
-      </body>
+            </div>
+            <div class="form__field">
+              <label for="postal-code" class="form__field-label"
+                >Postal code: *</label
+              >
+              <div class="input-wrapper">
+                <input
+                  type="text"
+                  id="postal-code"
+                  name="postal-code"
+                  class="form__field-input"
+                  data-id="postal"
+                  required
+                />
+                <span class="error"></span>
+              </div>
+            </div>
+            <div class="form__field">
+              <label for="password" class="form__field-label"
+                >Password: *</label
+              >
+              <div class="input-wrapper">
+                <input
+                  type="password"
+                  id="password"
+                  name="password"
+                  class="form__field-input"
+                  data-id="password"
+                  pattern="(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[#?!@$%^&*\-])[A-Za-z0-9#?!@$%^&*\-]{8,}"
+                  required
+                />
+                <span class="error"></span>
+              </div>
+            </div>
+            <div class="form__field">
+              <label for="password-confirm" class="form__field-label"
+                >confirm password: *</label
+              >
+              <div class="input-wrapper">
+                <input
+                  type="password"
+                  id="password-confirm"
+                  name="password-confirm"
+                  class="form__field-input"
+                  data-id="confirm"
+                  required
+                />
+                <span class="error"></span>
+              </div>
+            </div>
+          </div>
+          <div class="form__submit-wrapper">
+            <button class="form__submit-btn">submit</button>
+          </div>
+        </form>
+        <p class="status">status: awaiting input...</p>
+      </section>
+      <button class="terminal__power-btn"></button>
+    </main>
+  </body>
 </html>

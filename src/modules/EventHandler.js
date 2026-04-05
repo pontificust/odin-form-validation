@@ -18,7 +18,7 @@ export class EventHandler {
         }
       });
       this.formFieldsState.setCurrentStatus(error);
-      this.formFieldsState.formStatusElem.classList.add("form-error"); 
+      this.formFieldsState.formStatusElem.classList.add("form-error");
     } else {
       this.formFieldsState.setCurrentStatus(success);
       e.target.reset();
@@ -67,8 +67,7 @@ export class EventHandler {
     if (!validator()) {
       this.formFieldsState.formStatusElem.classList.remove("form-error");
       this.formFieldsState.formStatusElem.classList.add("warning");
-      this.formFieldsState.formStatusElem.textContent =
-        errors.statusMessage;
+      this.formFieldsState.formStatusElem.textContent = errors.statusMessage;
     }
   }
 }

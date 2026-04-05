@@ -659,7 +659,7 @@ body {
   justify-content: center;
   color: var(--error-color);
   opacity: 0;
-  transition: all .3s;
+  transition: all 0.3s;
   pointer-events: none;
   font-size: clamp(1rem, 1.1vw, 1.6rem);
 }
@@ -672,7 +672,7 @@ body {
   text-align: center;
   font-size: clamp(2rem, 1.6vw, 3rem);
   height: 50px;
-  transition: all .4s;
+  transition: all 0.4s;
 }
 
 .status.form-error {
