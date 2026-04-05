@@ -5,34 +5,54 @@ export class FormFieldsState {
     this.countries = countries;
     this.postalCodes = postalCodes;
     this.hasErrors = false;
+    this.formStatusElem = document.querySelector(".status");
     this.email = new Field(
-      { typeMismatch: "Wrong type", valueMissing: "Value Missing" },
+      {
+        typeMismatch: "[ERROR: INVALID_COMMS_ADDRESS_FORMAT]",
+        valueMissing: "[CRITICAL: INPUT_BUFFER_EMPTY]",
+        statusMessage:
+          "STATUS: ACCESSING COMMS_LINK... PLEASE ENTER REGISTERED ADDRESS.",
+      },
       "email",
     );
+
     this.country = new Field(
       {
-        customMismatch: "The country must exist",
-        valueMissing: "Value Missing",
+        customMismatch: "[ERROR: GEOGRAPHIC_REGION_NOT_RECOGNIZED]",
+        valueMissing: "[CRITICAL: REGION_DATA_REQUIRED]",
+        statusMessage:
+          "STATUS: GEOGRAPHIC SCANNER ACTIVE... DEFINE CURRENT SECTOR.",
       },
       "country",
     );
+
     this.postal = new Field(
-      {customMismatch: "The code doesn't exist",
-      valueMissing: "Value Missing"},
+      {
+        customMismatch: "[ERROR: LOCATION_SECTOR_UNDEFINED]",
+        valueMissing: "[CRITICAL: ZIP_COORDS_MISSING]",
+        statusMessage:
+          "STATUS: INDEXING SECTOR COORDS... ENTER LOCAL DELIVERY CODE.",
+      },
       "postal",
     );
+
     this.password = new Field(
-      { patternMismatch: `The password must contain al least:
-        - one uppercase English letter
-        - one lowercase English letter
-        - one digit
-        - one special character.`,
-      valueMissing: "Value missing"},
+      {
+        patternMismatch: `[SECURITY_THRESHOLD_NOT_MET]`,
+        valueMissing: "[CRITICAL: SECURITY_KEY_REQUIRED]",
+        statusMessage:
+          "STATUS: REQ: 8+ CHARS // ALPHA-NUM // 1x CASE // 1x SPEC-CHAR",
+      },
       "password",
     );
+
     this.confirm = new Field(
-      {customMismatch: "The passwords must be equal",
-      valueMissing: "Value missing",},
+      {
+        customMismatch: "[ERROR: BIT_PARITY_MISMATCH - KEYS_NOT_SYNCED]",
+        valueMissing: "[CRITICAL: RE-ENTRY_VALIDATION_REQUIRED]",
+        statusMessage:
+          "STATUS: INITIALIZING PARITY CHECK... RE-ENTER SECURITY KEY.",
+      },
       "confirm",
     );
 
@@ -44,6 +64,15 @@ export class FormFieldsState {
       confirm: () => this.isConfirm(),
     };
 
+    this.formStatus = {
+      processing: "STATUS: INITIALIZING PARITY CHECK... RE-ENTER SECURITY KEY.",
+      success:
+        "STATUS: DATA_PACKET_RECEIVED // ENROLLMENT COMPLETE // WELCOME, CITIZEN.",
+      error:
+        "STATUS: CRITICAL ERROR // DATA_CORRUPTION_DETECTED // RE-ENTER FIELD",
+      initial: "STATUS: ROBCO OS V2.5.1 // AWAITING USER INPUT...",
+    };
+
     this.fields = [
       this.email,
       this.country,
@@ -53,8 +82,12 @@ export class FormFieldsState {
     ];
   }
 
+  setCurrentStatus = (status) => {
+    this.formStatusElem.textContent = status;
+  };
+
   updateFormStatus() {
-    this.fields.forEach(({name}) => this.updateFieldStatus(name));
+    this.fields.forEach(({ name }) => this.updateFieldStatus(name));
     this.hasErrors = this.fields.some((field) => {
       return field.hasErrors === true;
     });
@@ -67,11 +100,15 @@ export class FormFieldsState {
 
   getErrorMsg(fieldName) {
     const { inputElement, errors } = this[fieldName];
-    const { valueMissing, typeMismatch, patternMismatch, customMismatch } = errors;
+    const { valueMissing, typeMismatch, patternMismatch, customMismatch } =
+      errors;
     const errorMsg = inputElement.validity.valueMissing
-      ? valueMissing : inputElement.validity.typeMismatch ?
-      typeMismatch : inputElement.validity.patternMismatch ?
-      patternMismatch : customMismatch;
+      ? valueMissing
+      : inputElement.validity.typeMismatch
+        ? typeMismatch
+        : inputElement.validity.patternMismatch
+          ? patternMismatch
+          : customMismatch;
     return errorMsg;
   }
 

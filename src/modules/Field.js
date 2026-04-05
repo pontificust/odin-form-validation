@@ -1,6 +1,12 @@
 export class Field {
   constructor(
-    { typeMismatch, valueMissing, patternMismatch, customMismatch },
+    {
+      typeMismatch,
+      valueMissing,
+      patternMismatch,
+      customMismatch,
+      statusMessage,
+    },
     inputName,
   ) {
     this.name = inputName;
@@ -9,6 +15,7 @@ export class Field {
       valueMissing: valueMissing,
       patternMismatch: patternMismatch,
       customMismatch: customMismatch,
+      statusMessage: statusMessage,
     };
     this.typeMismatch = typeMismatch;
     this.valueMissing = valueMissing;
